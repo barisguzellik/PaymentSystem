@@ -24,8 +24,10 @@ namespace PaymentSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            //services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddRazorPages();
+            services.Add(new ServiceDescriptor(typeof(DbEvents), new DbEvents()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

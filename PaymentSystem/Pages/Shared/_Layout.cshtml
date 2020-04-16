@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using PaymentSystem.Model
+@inject DbEvents DbEvents
+@if (Context.Request.Cookies["token"] != null)
+{
+    if (!DbEvents.isLogin(Context.Request.Cookies["token"].ToString()))
+    {
+        Context.Response.Redirect("/Index");
+    }
+}
+else
+{
+    Context.Response.Redirect("/Index");
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -45,7 +59,15 @@
     <!-- Sweet-Alert  -->
     <script src="~/assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script src="~/assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
-    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/plugins/datatables/datatables.min.js"></script>
+    <style>
+        .paginate_button>a {
+            padding:10px !important
+        }
+        .dataTables_filter>label>input{
+            width:200px !important
+        }
+    </style>
 </head>
 <body class="fix-header card-no-border fix-sidebar">
     <div class="preloader">
@@ -69,7 +91,7 @@
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span style="color: white; font-weight: bold;">
-                            ADMIN
+                            TS
                         </span>
                     </a>
                 </div>
@@ -78,7 +100,7 @@
                         <!-- This is  -->
                         <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                         <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a></li>
-                        <li class="nav-item hidden-sm-down"><span>Administrator Panel</span></li>
+                        <li class="nav-item hidden-sm-down"><span>Tahsilat Sistemi</span></li>
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
@@ -104,15 +126,24 @@
                     <ul id="sidebarnav">
                         <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                                <i class="mdi mdi-tree"></i>
-                                <span class="hide-menu">Category</span>
+                                <i class="fa fa-building"></i>
+                                <span class="hide-menu">Şirket</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/Category/AddCategory">Add Category</a></li>
-                                <li><a href="/Category">Categories</a></li>
+                                <li><a href="/Organization/Add">Şirket Ekle</a></li>
+                                <li><a href="/Organization/List">Şirketler</a></li>
                             </ul>
                         </li>
-                     
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                                <span class="hide-menu">Üye</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="/User/Add">Üye Ekle</a></li>
+                                <li><a href="/User/List">Üyeler</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </nav>
@@ -123,7 +154,7 @@
             @RenderBody()
 
             <footer class="footer">
-                © 2020 Admin Pro by wrappixel.com
+                © 2020 Payment System
             </footer>
         </div>
     </div>

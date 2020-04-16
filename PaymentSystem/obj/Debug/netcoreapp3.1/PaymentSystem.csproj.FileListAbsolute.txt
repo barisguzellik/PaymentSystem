@@ -137,3 +137,6 @@ C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\PaymentSystem.dll
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\PaymentSystem.pdb
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Blank.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Organization\Add.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Organization\Edit.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Organization\List.cshtml.g.cs

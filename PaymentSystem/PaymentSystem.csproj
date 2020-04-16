@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\System\" />
+    <Folder Include="Pages\Log\" />
+    <Folder Include="Pages\Payment\" />
+    <Folder Include="Pages\User\" />
   </ItemGroup>
 
   <ItemGroup>

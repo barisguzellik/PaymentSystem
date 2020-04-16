@@ -17,7 +17,7 @@
     <meta name="author" content="" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon.png" />
-    <title>Admin</title>
+    <title>Tahsilat Sistemi</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- page css -->
@@ -44,19 +44,19 @@
     <section id="wrapper" class="login-register login-sidebar" style="background-image: url('/assets/images/background/login-register.jpg');">
         <div class="login-box card">
             <div class="card-body">
-                <form>
+                <form method="post">
                     <div class="form-horizontal form-material" id="loginform">
                         <a href="javascript:void(0)" class="text-center db">
                             <img src="~/assets/images/logo-icon.png" alt="Home" /><br />
                         </a>
                         <div class="form-group m-t-40">
                             <div class="col-xs-12">
-                                <input type="text" class="form-control" required placeholder="Kullanıcı Adı" />
+                                <input asp-for="User.UserName" type="text" class="form-control" required placeholder="Kullanıcı Adı" />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input type="password" class="form-control" required placeholder="Parola" />
+                                <input asp-for="User.Password" type="password" class="form-control" required placeholder="Parola" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -92,7 +92,14 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
-        
+
+        function showError() {
+            swal('Hatalı Giriş','Kullanıcı Adı veya Parola hatalı...','error');
+        }
+
+         @Model.Error
+
+
     </script>
 </body>
 </html>
