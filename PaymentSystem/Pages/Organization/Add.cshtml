@@ -1,8 +1,77 @@
 ﻿@page
 @model PaymentSystem.AddModel
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Şirket Ekle";
 }
 
-<h1>Add</h1>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Şirket Ekle</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+                <li class="breadcrumb-item"><a href="/Organization/List">Şirketler</a></li>
+                <li class="breadcrumb-item active">Şirket Ekle</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form" method="post">
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Şirket Adı
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Organization.Name" type="text" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Telefon
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Organization.Phone" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Adres
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Organization.Address" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Durum
+                            </label>
+                            <div class="col-10">
+                                <select asp-for="Organization.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button type="submit" name="submitButton" class="btn btn-info waves-effect m-t-10">KAYDET</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showMessage() {
+            Swal.fire('Kaydet','Değişiklikler kaydedildi...','success');
+    }
+    function errorMessage() {
+            Swal.fire('Kaydet','Bir hata oluştu...','error');
+    }
 
+         @Model.Message
+</script>

@@ -15,13 +15,13 @@ namespace PaymentSystem.Model
 
         public enum Status
         {
-            Disable = 0,
-            Enable = 1
+            Pasif = 0,
+            Aktif = 1
         }
         public enum Visible
         {
-            False = 0,
-            True = 1
+            Pasif = 0,
+            Aktif = 1
         }
     }
 }

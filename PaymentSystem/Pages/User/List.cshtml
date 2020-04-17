@@ -1,0 +1,72 @@
+﻿@page
+@model PaymentSystem.UserListModel
+@{
+    ViewData["Title"] = "Üyeler";
+}
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Üyeler</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+                <li class="breadcrumb-item active">Üyeler</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table">
+                        <table id="datatable" style="width:100%;" class="display nowrap table table-hover table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Şirket</th>
+                                    <th>Tip</th>
+                                    <th>Adı</th>
+                                    <th>Soyadı</th>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Oluşturulma Tarihi</th>
+                                    <th>Durum</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            data: @Json.Serialize(Model.User),
+            dom: 'Bfrtip',
+            buttons: ['excel', 'pdf'],
+            language:{url:'/assets/plugins/datatables/turkish.json'},
+            columns: [
+                { data: 'organization.name' },
+                { data: 'userType', render: function (data) { return data } },
+                { data: 'firstName' },
+                { data: 'lastName' },
+                { data: 'userName' },
+                { data: 'createdDate', render: function (data) { return new Date(data).toLocaleString()  } },
+                { data: 'status',render:function (data){if (data==1){return '<div class=\"badge badge-success\"> </div>'}else{return '<div class=\"badge badge-danger\"> </div>' }}},
+                {
+                    data: 'userId', orderable: false, class: 'text-center',
+                    render: function (data) {
+                        return '<a href="/User/Edit?id=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>'
+
+                    }
+                }
+            ]
+        });
+    });
+</script>
+

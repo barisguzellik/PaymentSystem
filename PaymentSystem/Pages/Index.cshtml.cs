@@ -30,9 +30,9 @@ namespace PaymentSystem.Pages
         public void OnGet()
         {
         }
-        public ActionResult OnPost()
+        public IActionResult OnPost()
         {
-            var sql = "SELECT*FROM Users WHERE UserName=@username AND Password=@password AND Status=1";
+            var sql = "SELECT*FROM Users WHERE UserType=1 AND UserName=@username AND Password=@password AND Status=1";
             var param = new
             {
                 username = User.UserName,

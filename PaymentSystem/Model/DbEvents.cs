@@ -20,7 +20,7 @@ namespace PaymentSystem.Model
 
         public bool isLogin(string token)
         {
-            var sql = "SELECT*FROM Users WHERE Token=@token AND Status=1";
+            var sql = "SELECT*FROM Users WHERE Token=@token AND UserType=1 AND Status=1";
             var param = new
             {
                 token = token,

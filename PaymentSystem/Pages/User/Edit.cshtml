@@ -1,19 +1,19 @@
 ﻿@page
-@model PaymentSystem.EditModel
+@model PaymentSystem.UserEditModel
 @{
-    ViewData["Title"] = "Şirket Düzenle";
+    ViewData["Title"] = "Üye Düzenle";
 }
 
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Şirket Düzenle</h3>
+            <h3 class="text-themecolor">Üye Düzenle</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-                <li class="breadcrumb-item"><a href="/Organization/List">Şirketler</a></li>
-                <li class="breadcrumb-item active">Şirket Düzenle</li>
+                <li class="breadcrumb-item"><a href="/User/List">Üyeler</a></li>
+                <li class="breadcrumb-item active">Üye Düzenle</li>
             </ol>
         </div>
     </div>
@@ -22,37 +22,59 @@
             <div class="card">
                 <div class="card-body">
                     <form class="form" method="post">
-                        <input type="hidden" asp-for="Organization.OrganizationId" />
+                        <input type="hidden" asp-for="User.UserId" />
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Şirket Adı
+                                Şirket
                             </label>
                             <div class="col-10">
-                                <input asp-for="Organization.Name" type="text" class="form-control" required />
+                                <select asp-for="User.OrganizationId" class="form-control">
+                                    @foreach (var item in Model.Organizations)
+                                    {
+                                        <option value="@item.OrganizationId">@item.Name</option>
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Telefon
+                                Tip
                             </label>
                             <div class="col-10">
-                                <input asp-for="Organization.Phone" type="text" class="form-control" />
+                                <select asp-for="User.UserType" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.UserType>()" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Adres
+                                Üye Adı
                             </label>
                             <div class="col-10">
-                                <input asp-for="Organization.Address" type="text" class="form-control" />
+                                <input asp-for="User.FirstName" type="text" class="form-control" required />
                             </div>
                         </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Üye Soyadı
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="User.LastName" type="text" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Kullanıcı Adı
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="User.UserName" type="text" class="form-control" required />
+                            </div>
+                        </div>
+
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Durum
                             </label>
                             <div class="col-10">
-                                <select asp-for="Organization.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                                <select asp-for="User.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
                             </div>
                         </div>
                         <div class="form-group row">
