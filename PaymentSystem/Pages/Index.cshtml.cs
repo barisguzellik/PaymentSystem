@@ -22,7 +22,7 @@ namespace PaymentSystem.Pages
         }
 
         [BindProperty]
-        public User User { get; set; }
+        public PaymentSystem.Model.User User { get; set; }
         [BindProperty]
         public string Error { get; set; }
 
@@ -43,7 +43,7 @@ namespace PaymentSystem.Pages
             if (d.Result != null)
             {
                 Response.Cookies.Append("token", d.Result.Token, new CookieOptions { Expires = DateTime.Now.AddHours(2) });
-                return RedirectToPage("/Organization/List");
+                return RedirectToPage("/Dashboard/Index");
             }
             else
             {

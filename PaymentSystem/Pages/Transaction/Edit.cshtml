@@ -1,0 +1,154 @@
+﻿@page
+@model PaymentSystem.TransactionEditModel
+@{
+    ViewData["Title"] = "Alacak Düzenle";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Alacak Düzenle</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+                <li class="breadcrumb-item"><a href="/Payment/List">Alacak</a></li>
+                <li class="breadcrumb-item active">Alacak Düzenle</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form" method="post">
+                        <input type="hidden" asp-for="Payment.PaymentId" />
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Üye
+                            </label>
+                            <div class="col-10">
+                                <select asp-for="Payment.UserId" class="selectUser" style="width:100%;">
+                                    @foreach (var item in Model.Users)
+                                    {
+                                        <option value="@item.UserId">@item.FirstName @item.LastName [@item.Organization.Name]</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Tutar
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Payment.Price" data-input-mask="money" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Açıklama
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Payment.Description" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Oluşturulma Tarihi
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Payment.CreatedDate" type="text" class="form-control date" />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Son Ödeme Tarihi
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="Payment.ExpiryDate" type="text" class="form-control date" />
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Durum
+                            </label>
+                            <div class="col-10">
+                                <select asp-for="Payment.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Görünüm
+                            </label>
+                            <div class="col-10">
+                                <select asp-for="Payment.Visible" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Visible>()" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
+                                <button type="button" onclick="onDelete()" class="btn btn-danger waves-effect m-t-10">SİL</button>
+                                <button style="display:none" id="deleteButton" type="submit" asp-page-handler="Delete" class="btn btn-danger waves-effect m-t-10">SİL</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.selectUser').select2({
+        dropdownCssClass: 'form-control',
+        containerCssClass: 'form-control'
+    });
+
+    $('[data-input-mask="money"]').mask('#.##0,00', { reverse: true });
+
+    $('#Payment_CreatedDate').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        "locale": {
+            "format": "MM/DD/YYYY HH:mm:ss"
+        }
+    });
+    $('#Payment_ExpiryDate').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        "locale": {
+            "format": "MM/DD/YYYY HH:mm:ss"
+        }
+    });
+
+</script>
+<script>
+
+    function onDelete() {
+
+        Swal.fire({
+            title: 'Sil',
+            text: "Silinecek onaylıyor musunuz?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'Hayır'
+        }).then((result) => {
+            if (result.value) {
+                document.getElementById('deleteButton').click();
+            }
+        });
+
+    }
+
+    function showMessage() {
+        Swal.fire('Kaydet', 'Değişiklikler kaydedildi...', 'success');
+    }
+
+    function errorMessage() {
+            Swal.fire('Kaydet','Bir hata oluştu...','error');
+    }
+
+    @Model.Message
+</script>

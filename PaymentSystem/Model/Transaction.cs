@@ -14,7 +14,8 @@ namespace PaymentSystem.Model
         public int PaymentId { get; set; }
         public Payment Payment { get; set; }
         public DateTime Date { get; set; }
-        public decimal Price { get; set; }
+        //public decimal Price { get; set; }
+        public string Price { get; set; }
         [DefaultValue(0)]
         public int Status { get; set; }
     }

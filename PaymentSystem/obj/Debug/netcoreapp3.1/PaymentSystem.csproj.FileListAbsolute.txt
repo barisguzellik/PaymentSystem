@@ -143,3 +143,10 @@ C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\User\Add.cshtml.g.cs
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\User\Edit.cshtml.g.cs
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\User\List.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Payment\Add.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Payment\Edit.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Payment\List.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Dashboard\Index.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Transaction\Add.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Transaction\Edit.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Transaction\List.cshtml.g.cs

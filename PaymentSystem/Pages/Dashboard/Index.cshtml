@@ -1,0 +1,96 @@
+﻿@page
+@model PaymentSystem.DashboardIndexModel
+@{
+    ViewData["Title"] = "Gösterge";
+}
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="fa fa-money" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Alacak</h6>
+                            <h2 class="m-t-0">@Model.totalPayment</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="fa fa-credit-card" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Tahsilat</h6>
+                            <h2 class="m-t-0">@Model.totalTransaction</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="fa fa-credit-card" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Geciken Tahsilat</h6>
+                            <h2 class="m-t-0">@Model.totalDelayedPayment</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="fa fa-building" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Şirket</h6>
+                            <h2 class="m-t-0">@Model.totalOrganization</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="fa fa-users" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Üye</h6>
+                            <h2 class="m-t-0">@Model.totalUser</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

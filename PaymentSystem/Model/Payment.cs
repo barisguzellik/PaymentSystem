@@ -13,7 +13,8 @@ namespace PaymentSystem.Model
         public int PaymentId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public decimal Price { get; set; }
+        //public decimal Price { get; set; }
+        public string Price { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ExpiryDate { get; set; }
         [StringLength(255)]
