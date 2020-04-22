@@ -37,11 +37,10 @@ namespace PaymentSystem
         public IActionResult OnPostUpdate()
         {
             var con = DbEvents.getConnection();
-            var sql = "UPDATE Users SET OrganizationId=@OrganizationId,UserType=@UserType,UserName=@UserName,FirstName=@FirstName,LastName=@LastName,Status=@Status  WHERE UserId=@UserId";
+            var sql = "UPDATE Users SET OrganizationId=@OrganizationId,UserName=@UserName,FirstName=@FirstName,LastName=@LastName,Status=@Status  WHERE UserId=@UserId";
             var param = new
             {
                 OrganizationId = User.OrganizationId,
-                UserType = User.UserType,
                 UserName = User.UserName,
                 FirstName = User.FirstName,
                 LastName = User.LastName,
@@ -51,6 +50,9 @@ namespace PaymentSystem
 
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
+
+            DbEvents.addLog(User.FirstName + " " + User.LastName + " isimli üye güncellendi.", Request.Cookies["token"].ToString());
+
             return OnGet();
 
         }
@@ -61,6 +63,8 @@ namespace PaymentSystem
             var sql = "DELETE from Users Where UserId=@Id";
             var param = new { Id = id };
             con.Execute(sql, param);
+
+            DbEvents.addLog(User.FirstName + " " + User.LastName + " isimli üye silindi.", Request.Cookies["token"].ToString());
 
             return RedirectToPage("/User/List");
         }

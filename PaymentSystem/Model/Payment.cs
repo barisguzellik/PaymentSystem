@@ -23,7 +23,6 @@ namespace PaymentSystem.Model
         public int Status { get; set; }
         [DefaultValue(0)]
         public int Visible { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
         
 
     }

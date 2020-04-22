@@ -1,19 +1,19 @@
 ﻿@page
 @model PaymentSystem.TransactionAddModel
 @{
-    ViewData["Title"] = "Alacak Ekle";
+    ViewData["Title"] = "Tahsilat Ekle";
 }
 
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Alacak Ekle</h3>
+            <h3 class="text-themecolor">Tahsilat Ekle</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-                <li class="breadcrumb-item"><a href="/Payment/List">Alacak</a></li>
-                <li class="breadcrumb-item active">Alacak Ekle</li>
+                <li class="breadcrumb-item"><a href="/Transaction/List">Tahsilat</a></li>
+                <li class="breadcrumb-item active">Tahsilat Ekle</li>
             </ol>
         </div>
     </div>
@@ -27,7 +27,7 @@
                                 Üye
                             </label>
                             <div class="col-10">
-                                <select asp-for="Payment.UserId" class="selectUser" style="width:100%;">
+                                <select asp-for="Transaction.UserId" class="selectUser" style="width:100%;">
                                     @foreach (var item in Model.Users)
                                     {
                                         <option value="@item.UserId">@item.FirstName @item.LastName [@item.Organization.Name]</option>
@@ -40,31 +40,15 @@
                                 Tutar
                             </label>
                             <div class="col-10">
-                                <input asp-for="Payment.Price" data-input-mask="money" class="form-control" required />
+                                <input asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
                             </div>
                         </div>
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Açıklama
+                                Ödeme Tarihi
                             </label>
                             <div class="col-10">
-                                <input asp-for="Payment.Description" type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Oluşturulma Tarihi
-                            </label>
-                            <div class="col-10">
-                                <input asp-for="Payment.CreatedDate" type="text" class="form-control date" />
-                            </div>
-                        </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Son Ödeme Tarihi
-                            </label>
-                            <div class="col-10">
-                                <input asp-for="Payment.ExpiryDate" type="text"  class="form-control date" />
+                                <input asp-for="Transaction.Date" type="text"  class="form-control date" />
                             </div>
                         </div>
                         <div class="form-group m-t-40 row">
@@ -72,17 +56,10 @@
                                 Durum
                             </label>
                             <div class="col-10">
-                                <select asp-for="Payment.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                                <select asp-for="Transaction.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Görünüm
-                            </label>
-                            <div class="col-10">
-                                <select asp-for="Payment.Visible" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Visible>()" class="form-control"></select>
-                            </div>
-                        </div>
+                       
                         <div class="form-group row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-info waves-effect m-t-10">KAYDET</button>
@@ -102,14 +79,7 @@
 
     $('[data-input-mask="money"]').mask('#.##0,00', { reverse: true });
 
-    $('#Payment_CreatedDate').daterangepicker({
-        singleDatePicker: true,
-        timePicker: true,
-        "locale": {
-            "format": "MM/DD/YYYY HH:mm:ss"
-        }
-    });
-    $('#Payment_ExpiryDate').daterangepicker({
+    $('#Transaction_Date').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
         "locale": {

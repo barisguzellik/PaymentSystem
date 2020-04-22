@@ -6,17 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PaymentSystem.Model;
 using Dapper;
+using System.Dynamic;
+
 namespace PaymentSystem
 {
     public class ListModel : PageModel
     {
         DbEvents DbEvents = new DbEvents();
-        public List<Organization> Organizations { get; set; }
+        public List<dynamic> Organizations { get; set; }
 
         public void OnGet()
         {
             var con = DbEvents.getConnection();
-            Organizations = con.QueryAsync<Organization>("SELECT*FROM Organizations").Result.ToList();
+            string sql = "SELECT Organizations.*,(SELECT COUNT(UserId) FROM Users WHERE Users.OrganizationId = Organizations.OrganizationId) AS UserCount FROM Organizations";
+            Organizations = con.QueryAsync<dynamic>(sql).Result.ToList();
+
+            DbEvents.addLog("Şirketler listelendi.", Request.Cookies["token"].ToString());
+
         }
     }
 }

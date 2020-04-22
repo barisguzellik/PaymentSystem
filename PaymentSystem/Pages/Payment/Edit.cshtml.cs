@@ -55,6 +55,9 @@ namespace PaymentSystem
 
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
+
+            DbEvents.addLog(Payment.PaymentId + " numaralı alacak güncellendi.", Request.Cookies["token"].ToString());
+
             return OnGet();
 
         }
@@ -65,6 +68,8 @@ namespace PaymentSystem
             var sql = "DELETE from Payments Where PaymentId=@Id";
             var param = new { Id = id };
             con.Execute(sql, param);
+
+            DbEvents.addLog(Payment.PaymentId + " numaralı alacak silindi.", Request.Cookies["token"].ToString());
 
             return RedirectToPage("/Payment/List");
         }

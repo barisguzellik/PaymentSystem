@@ -36,14 +36,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Tip
-                            </label>
-                            <div class="col-10">
-                                <select asp-for="User.UserType" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.UserType>()" class="form-control"></select>
-                            </div>
-                        </div>
+                       
                         <div class="form-group m-t-40 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Üye Adı
@@ -79,9 +72,15 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-12">
-                                <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
-                                <button type="button" onclick="onDelete()" class="btn btn-danger waves-effect m-t-10">SİL</button>
-                                <button style="display:none" id="deleteButton" type="submit" asp-page-handler="Delete" class="btn btn-danger waves-effect m-t-10">SİL</button>
+                                @{
+                                    if (Model.User.UserType == 2)
+                                    {
+                                        <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
+                                        <button type="button" onclick="onDelete()" class="btn btn-danger waves-effect m-t-10">SİL</button>
+                                        <button style="display:none" id="deleteButton" type="submit" asp-page-handler="Delete" class="btn btn-danger waves-effect m-t-10">SİL</button>
+                                    }
+                                }
+
                             </div>
                         </div>
                     </form>

@@ -43,6 +43,7 @@ namespace PaymentSystem.Pages
             if (d.Result != null)
             {
                 Response.Cookies.Append("token", d.Result.Token, new CookieOptions { Expires = DateTime.Now.AddHours(2) });
+                DbEvents.addLog("Giriş yapıldı.", d.Result.Token);
                 return RedirectToPage("/Dashboard/Index");
             }
             else

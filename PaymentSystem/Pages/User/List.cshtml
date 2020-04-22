@@ -24,17 +24,18 @@
                             <thead>
                                 <tr>
                                     <th>Şirket</th>
-                                    <th>Tip</th>
                                     <th>Adı</th>
                                     <th>Soyadı</th>
                                     <th>Kullanıcı Adı</th>
                                     <th>Oluşturulma Tarihi</th>
+                                    <th>Borç</th>
                                     <th>Durum</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
@@ -51,17 +52,17 @@
             buttons: ['excel', 'pdf'],
             language:{url:'/assets/plugins/datatables/turkish.json'},
             columns: [
-                { data: 'organization.name' },
-                { data: 'userType', render: function (data) { return data } },
-                { data: 'firstName' },
-                { data: 'lastName' },
-                { data: 'userName' },
-                { data: 'createdDate', render: function (data) { return new Date(data).toLocaleString()  } },
-                { data: 'status',render:function (data){if (data==1){return '<div class=\"badge badge-success\"> </div>'}else{return '<div class=\"badge badge-danger\"> </div>' }}},
+                { data: 'Name' },
+                { data: 'FirstName' },
+                { data: 'LastName' },
+                { data: 'UserName' },
+                { data: 'CreatedDate', render: function (data) { return new Date(data).toLocaleString() } },
+                { data: 'Balance', render: function (data) { return parseFloat(data).toLocaleString("tr-TR", { style: 'currency', currency: 'TRY' }) } },
+                { data: 'Status',render:function (data){if (data==1){return '<div class=\"badge badge-success\"> </div>'}else{return '<div class=\"badge badge-danger\"> </div>' }}},
                 {
-                    data: 'userId', orderable: false, class: 'text-center',
+                    data: 'UserId', orderable: false, class: 'text-center',
                     render: function (data) {
-                        return '<a href="/User/Edit?id=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>'
+                        return '<a href="/Transaction/List?userid=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-credit-card"></i></a><a href="/Payment/List?userid=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-money"></i></a><a href="/User/Edit?id=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>'
 
                     }
                 }

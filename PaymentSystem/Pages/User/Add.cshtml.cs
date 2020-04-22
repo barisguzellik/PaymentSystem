@@ -45,6 +45,8 @@ namespace PaymentSystem
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
 
+            DbEvents.addLog(User.FirstName + " " + User.LastName + " isimli üye eklendi.", Request.Cookies["token"].ToString());
+
             return OnGet();
         }
     }

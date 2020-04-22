@@ -29,6 +29,7 @@
                                     <th>Tutar</th>
                                     <th>Ödeme Tarihi</th>
                                     <th>Durum</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,7 @@
                                     <th></th>
                                     <th></th>
                                     <th>@Model.totalTransaction</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -59,12 +61,19 @@
             buttons: ['excel', 'pdf'],
             language:{url:'/assets/plugins/datatables/turkish.json'},
             columns: [
-                { data: 'payment.user.organization.name' },
-                { data: 'payment.user.firstName'},
-                { data: 'payment.user.lastName' },
+                { data: 'user.organization.name' },
+                { data: 'user.firstName'},
+                { data: 'user.lastName' },
                 { data: 'price', render: function (data) { return parseFloat(data).toLocaleString("tr-TR", { style: 'currency', currency: 'TRY' }) } },
                 { data: 'date', render: function (data) { return new Date(data).toLocaleString() } },
                 { data: 'status', render: function (data) { if (data == 1) { return '<div class=\"badge badge-success\"> </div>' } else { return '<div class=\"badge badge-danger\"> </div>' } } },
+                {
+                    data: 'transactionId', orderable: false, class: 'text-center',
+                    render: function (data) {
+                        return '<a href="/Transaction/Edit?id=' + data + '" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>'
+
+                    }
+                }
             ]
         });
     });

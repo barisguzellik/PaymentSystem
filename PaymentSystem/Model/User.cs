@@ -28,6 +28,7 @@ namespace PaymentSystem.Model
         [StringLength(255)]
         public string Token { get; set; }
         public ICollection<Payment> Payments { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
         public ICollection<Log> Logs { get; set; }
     }
 }

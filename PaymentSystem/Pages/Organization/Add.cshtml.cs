@@ -34,6 +34,9 @@ namespace PaymentSystem
 
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
+            
+            DbEvents.addLog(Organization.Name + " isimli şirket eklendi.", Request.Cookies["token"].ToString());
+
             return Page();
 
         }

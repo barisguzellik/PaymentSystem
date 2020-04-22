@@ -14,7 +14,7 @@ namespace PaymentSystem
     {
         DbEvents DbEvents = new DbEvents();
         [BindProperty]
-        public Payment Payment { get; set; }
+        public Transaction Transaction { get; set; }
         [BindProperty]
         public IList<User> Users { get; set; }
         public string Message { get; set; }
@@ -30,9 +30,9 @@ namespace PaymentSystem
             if (!string.IsNullOrEmpty(Request.Query["id"]))
             {
                 int id = int.Parse(Request.Query["id"].ToString());
-                string sqlPay = "SELECT * FROM Payments WHERE PaymentId=@Id";
+                string sqlPay = "SELECT * FROM Transactions WHERE TransactionId=@Id";
                 var param = new { Id = id };
-                Payment = con.QueryFirstOrDefaultAsync<Payment>(sqlPay, param).Result;
+                Transaction = con.QueryFirstOrDefaultAsync<Transaction>(sqlPay, param).Result;
             }
 
             return Page();
@@ -40,33 +40,35 @@ namespace PaymentSystem
         public IActionResult OnPostUpdate()
         {
             var con = DbEvents.getConnection();
-            var sql = "UPDATE Payments SET UserId=@UserId,Price=@Price,CreatedDate=@CreatedDate,ExpiryDate=@ExpiryDate,Description=@Description,Status=@Status,Visible=@Visible  WHERE PaymentId=@PaymentId";
+            var sql = "UPDATE Transactions SET UserId=@UserId,Price=@Price,Date=@Date,Status=@Status  WHERE TransactionId=@TransactionId";
             var param = new
             {
-                UserId = Payment.UserId,
-                Price = DbEvents.convertToLocalPrice(Payment.Price),
-                CreatedDate = Payment.CreatedDate,
-                ExpiryDate = Payment.ExpiryDate,
-                Description = Payment.Description,
-                Status = Payment.Status,
-                Visible = Payment.Visible,
-                PaymentId=Payment.PaymentId
+                UserId = Transaction.UserId,
+                Price = DbEvents.convertToLocalPrice(Transaction.Price),
+                Date = Transaction.Date,
+                Status = Transaction.Status,
+                TransactionId= Transaction.TransactionId
             };
 
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
+
+            DbEvents.addLog(Transaction.TransactionId + " numaralı tahsilat güncellendi.", Request.Cookies["token"].ToString());
+
             return OnGet();
 
         }
         public IActionResult OnPostDelete()
         {
-            var id = Payment.PaymentId;
+            var id = Transaction.TransactionId;
             var con = DbEvents.getConnection();
-            var sql = "DELETE from Payments Where PaymentId=@Id";
+            var sql = "DELETE from Transactions Where TransactionId=@Id";
             var param = new { Id = id };
             con.Execute(sql, param);
 
-            return RedirectToPage("/Payment/List");
+            DbEvents.addLog(Transaction.TransactionId + " numaralı tahsilat silindi.", Request.Cookies["token"].ToString());
+
+            return RedirectToPage("/Transaction/List");
         }
     }
 }

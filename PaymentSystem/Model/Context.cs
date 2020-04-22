@@ -32,17 +32,18 @@ namespace PaymentSystem.Model
                 .WithMany(p => p.Payments)
                 .HasForeignKey(p => p.UserId);
 
+            //USER>TRANSACTIONS
+            modelBuilder.Entity<Transaction>()
+                .HasOne<User>(u => u.User)
+                .WithMany(t => t.Transactions)
+                .HasForeignKey(p => p.UserId);
+
             //USER>LOGS
             modelBuilder.Entity<Log>()
                .HasOne<User>(u => u.User)
                .WithMany(l => l.Logs)
                .HasForeignKey(p => p.UserId);
-
-            //PAYMENT>TRANSACTIONS
-            modelBuilder.Entity<Transaction>()
-                .HasOne<Payment>(p => p.Payment)
-                .WithMany(t => t.Transactions)
-                .HasForeignKey(t => t.PaymentId);
+           
         }
     }
 }

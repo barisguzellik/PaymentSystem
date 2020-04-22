@@ -43,6 +43,9 @@ namespace PaymentSystem
 
             con.ExecuteAsync(sql, param);
             Message = "showMessage()";
+
+            DbEvents.addLog(Organization.Name + " isimli şirket güncellendi.", Request.Cookies["token"].ToString());
+
             return Page();
 
         }
@@ -53,6 +56,8 @@ namespace PaymentSystem
             var sql = "DELETE from Organizations Where OrganizationId=@Id";
             var param = new { Id = id };
             con.Execute(sql, param);
+
+            DbEvents.addLog(Organization.Name + " isimli şirket silindi.", Request.Cookies["token"].ToString());
 
             return RedirectToPage("/Organization/List");
         }

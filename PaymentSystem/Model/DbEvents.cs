@@ -33,6 +33,23 @@ namespace PaymentSystem.Model
                 return false;
         }
 
+        public int getUserId(string token)
+        {
+            var sql = "SELECT UserId FROM Users WHERE Token=@token";
+            var param = new
+            {
+                token = token,
+            };
+            var con = getConnection();
+            return con.ExecuteScalar<int>(sql, param);
+        }
+
+        public async void addLog(string message, string token)
+        {
+            var con = getConnection();
+            await con.ExecuteAsync("INSERT INTO Logs(Date,Description,UserId) VALUES('" + DateTime.Now + "','"+message+"'," + getUserId(token) + ")");
+        }
+
         public string MD5Hash(string val)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();

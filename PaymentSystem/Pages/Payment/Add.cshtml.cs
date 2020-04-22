@@ -47,6 +47,8 @@ namespace PaymentSystem
             con.Execute(sql, param);
             Message = "showMessage()";
 
+            DbEvents.addLog(Payment.UserId + " numaralı kullanıcı için " + Payment.Price + " tutarında alacak eklendi.", Request.Cookies["token"].ToString());
+
             return OnGet();
         }
     }

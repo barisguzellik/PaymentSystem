@@ -25,7 +25,7 @@ namespace PaymentSystem
             var _totalOrganization = con.ExecuteScalar("SELECT COUNT(OrganizationId) FROM Organizations");
             totalOrganization = _totalOrganization.ToString();
 
-            var _totalUser = con.ExecuteScalar("SELECT COUNT(UserId) FROM Users");
+            var _totalUser = con.ExecuteScalar("SELECT COUNT(UserId) FROM Users WHERE UserType=2");
             totalUser = _totalUser.ToString();
 
             var _totalPayment = con.ExecuteScalar("SELECT SUM(Price) FROM Payments");
@@ -42,6 +42,8 @@ namespace PaymentSystem
             if (_totalDelayedPayment == null)
                 _totalDelayedPayment = 0;
             totalDelayedPayment = Convert.ToDouble(_totalDelayedPayment).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
+
+            DbEvents.addLog("Gösterge listelendi.", Request.Cookies["token"].ToString());
         }
     }
 }
