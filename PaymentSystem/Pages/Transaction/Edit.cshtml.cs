@@ -40,12 +40,9 @@ namespace PaymentSystem
         public IActionResult OnPostUpdate()
         {
             var con = DbEvents.getConnection();
-            var sql = "UPDATE Transactions SET UserId=@UserId,Price=@Price,Date=@Date,Status=@Status  WHERE TransactionId=@TransactionId";
+            var sql = "UPDATE Transactions SET Status=@Status  WHERE TransactionId=@TransactionId";
             var param = new
             {
-                UserId = Transaction.UserId,
-                Price = DbEvents.convertToLocalPrice(Transaction.Price),
-                Date = Transaction.Date,
                 Status = Transaction.Status,
                 TransactionId= Transaction.TransactionId
             };

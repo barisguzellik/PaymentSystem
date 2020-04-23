@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-body">
                     <form class="form" method="post">
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Üye
                             </label>
@@ -35,7 +35,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Tutar
                             </label>
@@ -43,7 +43,7 @@
                                 <input asp-for="Payment.Price" data-input-mask="money" class="form-control" required />
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Açıklama
                             </label>
@@ -51,7 +51,7 @@
                                 <input asp-for="Payment.Description" type="text" class="form-control" />
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Oluşturulma Tarihi
                             </label>
@@ -59,7 +59,7 @@
                                 <input asp-for="Payment.CreatedDate" type="text" class="form-control date" />
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Son Ödeme Tarihi
                             </label>
@@ -67,7 +67,7 @@
                                 <input asp-for="Payment.ExpiryDate" type="text"  class="form-control date" />
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Durum
                             </label>
@@ -75,7 +75,7 @@
                                 <select asp-for="Payment.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="form-group m-t-40 row">
+                        <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
                                 Görünüm
                             </label>

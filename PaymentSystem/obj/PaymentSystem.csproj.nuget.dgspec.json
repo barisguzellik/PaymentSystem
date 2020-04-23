@@ -42,9 +42,9 @@
               "target": "Package",
               "version": "[2.0.35, )"
             },
-            "Microsoft.DotNet.Watcher.Tools": {
+            "Iyzipay": {
               "target": "Package",
-              "version": "[2.0.2, )"
+              "version": "[2.1.37, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

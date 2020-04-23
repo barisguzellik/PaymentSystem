@@ -25,6 +25,7 @@
       "PaymentSystem/1.0.0": {
         "dependencies": {
           "Dapper": "2.0.35",
+          "Iyzipay": "2.1.37",
           "Microsoft.EntityFrameworkCore": "3.1.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.3",
@@ -320,6 +321,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Dapper.dll": {}
+        }
+      },
+      "Iyzipay/2.1.37": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Iyzipay.dll": {
+            "assemblyVersion": "2.1.37.0",
+            "fileVersion": "2.1.37.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Iyzipay.dll": {}
         }
       },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -3760,6 +3775,13 @@
       "sha512": "sha512-/xAgd8BO8EDnJ0sURWEV8LptHHvTKxoYiT63YUF2U/yWE2VyUCqR2jcrtEyNngT9Kjzppecz95UKiBla3PnR7g==",
       "path": "dapper/2.0.35",
       "hashPath": "dapper.2.0.35.nupkg.sha512"
+    },
+    "Iyzipay/2.1.37": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GFY4GJcNr+gn6Re8ZMSmCD3PGqo9qeqa0KMhpToDvL84wCIog4oKrhUC4lTzdeOs6u9YukxiGlk62O7r8eO9jA==",
+      "path": "iyzipay/2.1.37",
+      "hashPath": "iyzipay.2.1.37.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "type": "package",

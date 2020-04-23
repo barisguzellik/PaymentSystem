@@ -33,7 +33,7 @@ namespace PaymentSystem
                 _totalPayment = 0;
             totalPayment = Convert.ToDouble(_totalPayment).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
 
-            var _totalTransaction = con.ExecuteScalar("SELECT SUM(Price) FROM Transactions");
+            var _totalTransaction = con.ExecuteScalar("SELECT SUM(Price) FROM Transactions WHERE Status=1");
             if (_totalTransaction == null)
                 _totalTransaction = 0;
             totalTransaction = Convert.ToDouble(_totalTransaction).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));

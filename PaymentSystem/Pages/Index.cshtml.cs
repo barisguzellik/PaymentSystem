@@ -42,7 +42,7 @@ namespace PaymentSystem.Pages
             var d = con.QueryFirstOrDefaultAsync<User>(sql, param);
             if (d.Result != null)
             {
-                Response.Cookies.Append("token", d.Result.Token, new CookieOptions { Expires = DateTime.Now.AddHours(2) });
+                Response.Cookies.Append("token", d.Result.Token, new CookieOptions { Expires = DateTime.Now.AddHours(2), SameSite = SameSiteMode.None, HttpOnly = true });
                 DbEvents.addLog("Giriş yapıldı.", d.Result.Token);
                 return RedirectToPage("/Dashboard/Index");
             }

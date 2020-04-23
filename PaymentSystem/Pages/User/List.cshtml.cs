@@ -20,7 +20,7 @@ namespace PaymentSystem
         {
             var con = DbEvents.getConnection();
             var sql = "SELECT Organizations.Name,UserType,FirstName,LastName,UserName,Users.CreatedDate,Users.Status,Users.UserId, ";
-            sql += " ((SELECT SUM(Price) FROM Payments WHERE Payments.UserId=Users.UserId)-(SELECT SUM(Price) FROM Transactions WHERE Transactions.UserId=Users.UserId)) AS Balance FROM Users ";
+            sql += " ((SELECT SUM(Price) FROM Payments WHERE Payments.UserId=Users.UserId)-(SELECT SUM(Price) FROM Transactions WHERE Transactions.Status=1 AND Transactions.UserId=Users.UserId)) AS Balance FROM Users ";
             sql += " INNER JOIN Organizations on Users.OrganizationId=Organizations.OrganizationId";
             sql += " WHERE Users.UserType=2";
             if (!string.IsNullOrEmpty(Request.Query["organizationid"]))

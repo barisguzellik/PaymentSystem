@@ -25,6 +25,7 @@ namespace PaymentSystem
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
             services.AddRazorPages();
             services.Add(new ServiceDescriptor(typeof(DbEvents), new DbEvents()));
 

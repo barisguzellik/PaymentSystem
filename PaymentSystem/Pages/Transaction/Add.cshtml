@@ -21,51 +21,44 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="form" method="post">
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Üye
-                            </label>
-                            <div class="col-10">
-                                <select asp-for="Transaction.UserId" class="selectUser" style="width:100%;">
-                                    @foreach (var item in Model.Users)
-                                    {
-                                        <option value="@item.UserId">@item.FirstName @item.LastName [@item.Organization.Name]</option>
-                                    }
-                                </select>
-                            </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <form class="form" method="post">
+                                <div class="form-group m-t-20 row">
+                                    <label for="example-text-input" class="col-6 col-form-label">
+                                        Üye
+                                    </label>
+                                    <div class="col-6">
+                                        <select asp-for="Transaction.UserId" class="selectUser" style="width:100%;">
+                                            @foreach (var item in Model.Users)
+                                            {
+                                                <option value="@item.UserId">@item.FirstName @item.LastName [@item.Organization.Name]</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group m-t-20 row">
+                                    <label for="example-text-input" class="col-6 col-form-label">
+                                        Tutar
+                                    </label>
+                                    <div class="col-6">
+                                        <input asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-info waves-effect m-t-10">KAYDET</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Tutar
-                            </label>
-                            <div class="col-10">
-                                <input asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
-                            </div>
+                        <div class="col-6" style="border-left:solid 1px #ccc">
+                            <div id="iyzipay-checkout-form" class="responsive"></div>
                         </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Ödeme Tarihi
-                            </label>
-                            <div class="col-10">
-                                <input asp-for="Transaction.Date" type="text"  class="form-control date" />
-                            </div>
-                        </div>
-                        <div class="form-group m-t-40 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Durum
-                            </label>
-                            <div class="col-10">
-                                <select asp-for="Transaction.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
-                            </div>
-                        </div>
-                       
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-info waves-effect m-t-10">KAYDET</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -74,18 +67,18 @@
 <script>
     $('.selectUser').select2({
         dropdownCssClass: 'form-control',
-        containerCssClass:'form-control'
+        containerCssClass: 'form-control'
     });
 
     $('[data-input-mask="money"]').mask('#.##0,00', { reverse: true });
 
-    $('#Transaction_Date').daterangepicker({
+    /*$('#Transaction_Date').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
         "locale": {
             "format": "MM/DD/YYYY HH:mm:ss"
         }
-    });
+    });*/
 
 </script>
 <script>
@@ -93,8 +86,9 @@
             Swal.fire('Kaydet','Değişiklikler kaydedildi...','success');
     }
     function errorMessage() {
-            Swal.fire('Kaydet','Bir hata oluştu...','error');
+            Swal.fire('Hata','Bir hata oluştu...','error');
     }
 
          @Model.Message
 </script>
+@Html.Raw(@Model.Iyzico)

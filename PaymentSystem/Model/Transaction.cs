@@ -18,5 +18,6 @@ namespace PaymentSystem.Model
         public string Price { get; set; }
         [DefaultValue(0)]
         public int Status { get; set; }
+        public string Token { get; set; }
     }
 }

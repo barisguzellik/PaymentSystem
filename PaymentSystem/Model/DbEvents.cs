@@ -44,6 +44,17 @@ namespace PaymentSystem.Model
             return con.ExecuteScalar<int>(sql, param);
         }
 
+        public User getUser(int id)
+        {
+            var sql = "SELECT * FROM Users WHERE UserId=@id";
+            var param = new
+            {
+                id = id,
+            };
+            var con = getConnection();
+            return con.Query<User>(sql, param).SingleOrDefault();
+        }
+
         public async void addLog(string message, string token)
         {
             var con = getConnection();
