@@ -46,12 +46,12 @@ namespace PaymentSystem
                     };
                     con.Execute(sql, param);
                     DbEvents.addLog(checkoutForm.PaymentId + " numaralı ve " + decimal.Parse(checkoutForm.Price) + " tutarında tahsilat onaylandı.", Request.Cookies["token"].ToString());
-                    Result = "Swal.fire('Tahsilat','" + checkoutForm.PaymentId + " numaralı tahsilat gerçekleşti...','success');";
+                    Result = "Swal.fire('Tahsilat','" + checkoutForm.PaymentId + " numaralı tahsilat gerçekleşti...','success').then((res)=>{window.location.href='/Transaction/List'});";
                 }
                 else
                 {
                     DbEvents.addLog(checkoutForm.PaymentId + " numaralı ve " + decimal.Parse(checkoutForm.Price) + " tutarında tahsilat başarısız oldu.(" + checkoutForm.ErrorMessage + ")", Request.Cookies["token"].ToString());
-                    Result = "Swal.fire('Tahsilat','" + checkoutForm.PaymentStatus + "-" + checkoutForm.ErrorMessage + "','error');";
+                    Result = "Swal.fire('Tahsilat','" + checkoutForm.PaymentStatus + "-" + checkoutForm.ErrorMessage + "','error').then((res)=>{window.location.href='/Transaction/List'});";
                 }
             }
 

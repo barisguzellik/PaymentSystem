@@ -1,19 +1,17 @@
 ﻿@page
-@model PaymentSystem.UserEditModel
+@model PaymentSystem.SettingsModel
 @{
-    ViewData["Title"] = "Üye Düzenle";
+    ViewData["Title"] = "Ayarlar";
 }
-
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Üye Düzenle</h3>
+            <h3 class="text-themecolor">Ayarlar</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-                <li class="breadcrumb-item"><a href="/User/List">Üyeler</a></li>
-                <li class="breadcrumb-item active">Üye Düzenle</li>
+                <li class="breadcrumb-item active">Ayarlar</li>
             </ol>
         </div>
     </div>
@@ -39,7 +37,7 @@
 
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Üye Adı
+                                Ad
                             </label>
                             <div class="col-10">
                                 <input asp-for="User.FirstName" type="text" class="form-control" required />
@@ -47,7 +45,7 @@
                         </div>
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Üye Soyadı
+                                Soyad
                             </label>
                             <div class="col-10">
                                 <input asp-for="User.LastName" type="text" class="form-control" required />
@@ -66,29 +64,12 @@
                                 Parola
                             </label>
                             <div class="col-10">
-                                <input asp-for="User.Password" type="text" class="form-control" style="width:50%;" required />
-                                <button type="submit" asp-page-handler="UpdatePassword" class="btn btn-info waves-effect">Parolayı Güncelle</button>
-                            </div>
-                        </div>
-                        <div class="form-group m-t-20 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Durum
-                            </label>
-                            <div class="col-10">
-                                <select asp-for="User.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                                <input asp-for="User.Password" type="text" class="form-control" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-12">
-                                @{
-                                    if (Model.User.UserType == 2)
-                                    {
-                                        <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
-                                        <button type="button" onclick="onDelete()" class="btn btn-danger waves-effect m-t-10">SİL</button>
-                                        <button style="display:none" id="deleteButton" type="submit" asp-page-handler="Delete" class="btn btn-danger waves-effect m-t-10">SİL</button>
-                                    }
-                                }
-
+                                <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
                             </div>
                         </div>
                     </form>
@@ -98,25 +79,6 @@
     </div>
 </div>
 <script>
-
-    function onDelete() {
-
-        Swal.fire({
-            title: 'Sil',
-            text: "Silinecek onaylıyor musunuz?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Evet',
-            cancelButtonText: 'Hayır'
-        }).then((result) => {
-            if (result.value) {
-                document.getElementById('deleteButton').click();
-            }
-        });
-
-    }
 
     function showMessage() {
         Swal.fire('Kaydet', 'Değişiklikler kaydedildi...', 'success');

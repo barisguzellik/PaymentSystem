@@ -56,6 +56,24 @@ namespace PaymentSystem
             return OnGet();
 
         }
+        public IActionResult OnPostUpdatePassword()
+        {
+            var con = DbEvents.getConnection();
+            var sql = "UPDATE Users SET Password=@Password  WHERE UserId=@UserId";
+            var param = new
+            {
+                Password =DbEvents.MD5Hash(User.Password),
+                UserId = User.UserId
+            };
+
+            con.ExecuteAsync(sql, param);
+            Message = "showMessage()";
+
+            DbEvents.addLog(User.FirstName + " " + User.LastName + " isimli üyenin parolası güncellendi.", Request.Cookies["token"].ToString());
+
+            return OnGet();
+
+        }
         public IActionResult OnPostDelete()
         {
             var id = User.UserId;

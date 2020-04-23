@@ -13,15 +13,20 @@ namespace PaymentSystem
     {
         DbEvents DbEvents = new DbEvents();
 
+        public List<Log> Log { get; set; }
+
         public string totalOrganization { get; set; }
         public string totalUser { get; set; }
         public string totalPayment { get; set; }
         public string totalTransaction { get; set; }
+        public string totalTransactionFailure { get; set; }
         public string totalDelayedPayment { get; set; }
 
         public void OnGet()
         {
             var con = DbEvents.getConnection();
+
+
             var _totalOrganization = con.ExecuteScalar("SELECT COUNT(OrganizationId) FROM Organizations");
             totalOrganization = _totalOrganization.ToString();
 
@@ -38,12 +43,22 @@ namespace PaymentSystem
                 _totalTransaction = 0;
             totalTransaction = Convert.ToDouble(_totalTransaction).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
 
+            var _totalTransactionFailure = con.ExecuteScalar("SELECT SUM(Price) FROM Transactions WHERE Status=0");
+            if (_totalTransactionFailure == null)
+                _totalTransactionFailure = 0;
+            totalTransactionFailure = Convert.ToDouble(_totalTransactionFailure).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
+
             var _totalDelayedPayment = con.ExecuteScalar("SELECT SUM(Price) FROM Payments WHERE ExpiryDate<'" + DateTime.Now + "'");
             if (_totalDelayedPayment == null)
                 _totalDelayedPayment = 0;
             totalDelayedPayment = Convert.ToDouble(_totalDelayedPayment).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
 
             DbEvents.addLog("Gösterge listelendi.", Request.Cookies["token"].ToString());
+
+            var sql = "SELECT TOP 10 * FROM Logs ";
+            sql += " INNER JOIN Users on Users.UserId=Logs.UserId ORDER BY LogId DESC";
+            Log = con.QueryAsync<Log, User, Log>
+            (sql, (l, u) => { l.User = u; return l; }, splitOn: "UserId").Result.ToList();
         }
     }
 }

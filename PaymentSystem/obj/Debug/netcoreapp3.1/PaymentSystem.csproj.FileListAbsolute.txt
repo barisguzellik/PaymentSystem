@@ -153,3 +153,5 @@ C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\PaymentSystem.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\bin\Debug\netcoreapp3.1\Iyzipay.dll
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Transaction\ThreeDPay.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Profile\Logout.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Profile\Settings.cshtml.g.cs
