@@ -20,5 +20,6 @@ namespace PaymentSystem.Model
         public int Status { get; set; }
         public string Token { get; set; }
         public int TransactionType { get; set; }
+        public int PaymentChannelId { get; set; }
     }
 }

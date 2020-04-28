@@ -13,6 +13,7 @@ using Iyzipay.Request;
 using Iyzipay.Model;
 using Payment = Iyzipay.Model.Payment;
 using Microsoft.AspNetCore.Http;
+using PaymentChannel = PaymentSystem.Model.PaymentChannel;
 
 namespace PaymentSystem
 {
@@ -23,6 +24,11 @@ namespace PaymentSystem
         public Transaction Transaction { get; set; }
         [BindProperty]
         public IList<User> Users { get; set; }
+        [BindProperty]
+        public IList<PaymentChannel> PaymentChannels { get; set; }
+        [BindProperty]
+        public int PaymentChannelId { get; set; }
+        public PaymentChannel PaymentChannel { get; set; }
         public string Message { get; set; }
         public string Result { get; set; }
         public string Iyzico { get; set; }
@@ -34,10 +40,14 @@ namespace PaymentSystem
             sql += " WHERE Users.UserType=2 ORDER BY Users.FirstName";
             Users = con.QueryAsync<User, Organization, User>
                 (sql, (u, o) => { u.Organization = o; return u; }, splitOn: "OrganizationId").Result.ToList();
+
+            PaymentChannels = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel").Result.ToList();
             return Page();
         }
         public IActionResult OnPost()
         {
+            var con = DbEvents.getConnection();
+
             User getUser = DbEvents.getUser(Transaction.UserId);
 
             var checkoutFormToken = "";
@@ -45,18 +55,19 @@ namespace PaymentSystem
 
             if (Transaction.TransactionType == (int)Enums.TransactionType.Kredi_Kartı)
             {
+                PaymentChannel = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel WHERE PaymentChannelId=" + PaymentChannelId + "").Result.Single();
                 Options options = new Options()
                 {
-                    ApiKey = "sandbox-6C4FDBCcelqhyHqxttnZzkaCbU97pWkU",
-                    SecretKey = "sandbox-sZ5kCxHDR5nWcttdQC04PNmGhVj3VZoV",
-                    BaseUrl = "https://sandbox-api.iyzipay.com"
+                    ApiKey = PaymentChannel.ApiKey,
+                    SecretKey = PaymentChannel.SecretKey,
+                    BaseUrl = PaymentChannel.BaseUrl
                 };
 
                 CreateCheckoutFormInitializeRequest request = new CreateCheckoutFormInitializeRequest();
                 request.Price = DbEvents.convertToLocalPrice(Transaction.Price);
                 request.PaidPrice = DbEvents.convertToLocalPrice(Transaction.Price);
                 request.Currency = Currency.TRY.ToString();
-                request.CallbackUrl = "http://localhost:5000/Transaction/ThreeDPay";
+                request.CallbackUrl = PaymentChannel.CallbackUrl;
 
                 List<int> enabledInstallments = new List<int>();
                 enabledInstallments.Add(2);
@@ -113,8 +124,8 @@ namespace PaymentSystem
             }
 
 
-            var con = DbEvents.getConnection();
-            var sql = "INSERT INTO Transactions(UserId,Price,Date,Status,Token,TransactionType) Values(@UserId,@Price,@Date,@Status,@Token,@TransactionType)";
+
+            var sql = "INSERT INTO Transactions(UserId,Price,Date,Status,Token,TransactionType,PaymentChannelId) Values(@UserId,@Price,@Date,@Status,@Token,@TransactionType,@PaymentChannelId)";
             var param = new
             {
                 UserId = Transaction.UserId,
@@ -122,7 +133,8 @@ namespace PaymentSystem
                 Date = DateTime.Now,
                 Status = paymentStatus,
                 Token = checkoutFormToken,
-                TransactionType = Transaction.TransactionType
+                TransactionType = Transaction.TransactionType,
+                PaymentChannelId = PaymentChannel.PaymentChannelId
             };
 
             con.Execute(sql, param);

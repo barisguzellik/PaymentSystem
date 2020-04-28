@@ -17,6 +17,8 @@ namespace PaymentSystem
         public Transaction Transaction { get; set; }
         [BindProperty]
         public IList<User> Users { get; set; }
+        [BindProperty]
+        public IList<PaymentChannel> PaymentChannels { get; set; }
         public string Message { get; set; }
 
         public IActionResult OnGet()
@@ -26,6 +28,8 @@ namespace PaymentSystem
             sql += " WHERE Users.UserType=2 ORDER BY Users.FirstName";
             Users = con.QueryAsync<User, Organization, User>
                 (sql, (u, o) => { u.Organization = o; return u; }, splitOn: "OrganizationId").Result.ToList();
+
+            PaymentChannels = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel").Result.ToList();
 
             if (!string.IsNullOrEmpty(Request.Query["id"]))
             {

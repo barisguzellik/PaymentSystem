@@ -1,19 +1,19 @@
 ﻿@page
-@model PaymentSystem.TransactionEditModel
+@model PaymentSystem.PaymentChannelEditModel
 @{
-    ViewData["Title"] = "Tahsilat Düzenle";
+    ViewData["Title"] = "Ödeme Kanalı Düzenle";
 }
 
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-themecolor">Tahsilat Düzenle</h3>
+            <h3 class="text-themecolor">Ödeme Kanalı Düzenle</h3>
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-                <li class="breadcrumb-item"><a href="/Transaction/List">Tahsilat</a></li>
-                <li class="breadcrumb-item active">Tahsilat Düzenle</li>
+                <li class="breadcrumb-item"><a href="/PaymentChannel/List">Ödeme Kanalları</a></li>
+                <li class="breadcrumb-item active">Ödeme Kanalı Düzenle</li>
             </ol>
         </div>
     </div>
@@ -22,68 +22,47 @@
             <div class="card">
                 <div class="card-body">
                     <form class="form" method="post">
-                        <input type="hidden" asp-for="Transaction.TransactionId" />
+                        <input type="hidden" asp-for="PaymentChannel.PaymentChannelId" />
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Üye
+                                Kanal Adı
                             </label>
                             <div class="col-10">
-                                <select disabled asp-for="Transaction.UserId" class="selectUser" style="width:100%;">
-                                    @foreach (var item in Model.Users)
-                                    {
-                                        <option value="@item.UserId">@item.FirstName @item.LastName [@item.Organization.Name]</option>
-                                    }
-                                </select>
+                                <input asp-for="PaymentChannel.Name" type="text" class="form-control" required />
                             </div>
                         </div>
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Tutar
+                                Api Key
                             </label>
                             <div class="col-10">
-                                <input disabled asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
-                            </div>
-                        </div>
-
-                        <div class="form-group m-t-20 row">
-                            <label for="example-text-input" class="col-2 col-form-label">
-                                Oluşturulma Tarihi
-                            </label>
-                            <div class="col-10">
-                                <input disabled asp-for="Transaction.Date" type="text" class="form-control date" />
+                                <input asp-for="PaymentChannel.ApiKey" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Ödeme Kanalı
+                                Secret Key
                             </label>
                             <div class="col-10">
-                                <select disabled asp-for="Transaction.PaymentChannelId" class="form-control">
-                                    @foreach (var item in Model.PaymentChannels)
-                                    {
-                                        <option value="@item.PaymentChannelId">@item.Name</option>
-                                    }
-                                </select>
+                                <input asp-for="PaymentChannel.SecretKey" type="text" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Tip
+                                Base Url
                             </label>
                             <div class="col-10">
-                                <select disabled asp-for="Transaction.TransactionType" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.TransactionType>()" class="form-control"></select>
+                                <input asp-for="PaymentChannel.BaseUrl" type="text" class="form-control" />
                             </div>
                         </div>
-
                         <div class="form-group m-t-20 row">
                             <label for="example-text-input" class="col-2 col-form-label">
-                                Durum
+                                Callback Url
                             </label>
                             <div class="col-10">
-                                <select asp-for="Transaction.Status" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.Status>()" class="form-control"></select>
+                                <input asp-for="PaymentChannel.CallbackUrl" type="text" class="form-control" />
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <div class="col-12">
                                 <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>
@@ -97,24 +76,6 @@
         </div>
     </div>
 </div>
-<script>
-    $('.selectUser').select2({
-        dropdownCssClass: 'form-control',
-        containerCssClass: 'form-control'
-    });
-
-    $('[data-input-mask="money"]').mask('#.##0,00', { reverse: true });
-
-    /*$('#Transaction_Date').daterangepicker({
-        singleDatePicker: true,
-        timePicker: true,
-        "locale": {
-            "format": "MM/DD/YYYY HH:mm:ss"
-        }
-    });*/
-   
-
-</script>
 <script>
 
     function onDelete() {

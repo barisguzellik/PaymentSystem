@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PaymentSystem.Model;
+using PaymentChannel = PaymentSystem.Model.PaymentChannel;
 
 namespace PaymentSystem
 {
@@ -20,16 +21,27 @@ namespace PaymentSystem
         DbEvents DbEvents = new DbEvents();
 
         public string Result { get; set; }
+        public PaymentChannel PaymentChannel { get; set; }
+        public Transaction Transaction { get; set; }
 
         public IActionResult OnPost(IFormCollection data)
         {
             if (data["token"].ToString() != null)
             {
+                var con = DbEvents.getConnection();
+                var token = new
+                {
+                    Token = data["token"]
+                };
+                Transaction = con.QueryAsync<Transaction>("SELECT*FROM Transaction WHERE Token=@Token", token).Result.Single();
+
+                PaymentChannel = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel WHERE PaymentChannelId=" + Transaction.PaymentChannelId + "").Result.Single();
+
                 Options options = new Options()
                 {
-                    ApiKey = "sandbox-6C4FDBCcelqhyHqxttnZzkaCbU97pWkU",
-                    SecretKey = "sandbox-sZ5kCxHDR5nWcttdQC04PNmGhVj3VZoV",
-                    BaseUrl = "https://sandbox-api.iyzipay.com"
+                    ApiKey = PaymentChannel.ApiKey,
+                    SecretKey = PaymentChannel.SecretKey,
+                    BaseUrl = PaymentChannel.BaseUrl
                 };
 
                 RetrieveCheckoutFormRequest request = new RetrieveCheckoutFormRequest();
@@ -38,7 +50,7 @@ namespace PaymentSystem
                 CheckoutForm checkoutForm = CheckoutForm.Retrieve(request, options);
                 if (checkoutForm.PaymentStatus == "SUCCESS")
                 {
-                    var con = DbEvents.getConnection();
+
                     var sql = "UPDATE Transactions SET Status=1 WHERE Token=@Token";
                     var param = new
                     {

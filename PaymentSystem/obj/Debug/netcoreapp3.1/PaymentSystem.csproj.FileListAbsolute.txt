@@ -157,3 +157,6 @@ C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Profile\Settings.cshtml.g.cs
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\PaymentSystem.csproj.CoreCompileInputs.cache
 C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\PaymentSystem.genruntimeconfig.cache
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\PaymentChannel\Add.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\PaymentChannel\List.cshtml.g.cs
+C:\Users\baris\source\repos\PaymentSystem\PaymentSystem\obj\Debug\netcoreapp3.1\Razor\Pages\PaymentChannel\Edit.cshtml.g.cs
