@@ -63,6 +63,14 @@
                                 <input asp-for="PaymentChannel.CallbackUrl" type="text" class="form-control" />
                             </div>
                         </div>
+                        <div class="form-group m-t-20 row">
+                            <label for="example-text-input" class="col-2 col-form-label">
+                                Callback Url (Customer)
+                            </label>
+                            <div class="col-10">
+                                <input asp-for="PaymentChannel.CallbackUrlCustomer" type="text" class="form-control" />
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-12">
                                 <button type="submit" asp-page-handler="Update" class="btn btn-info waves-effect m-t-10">KAYDET</button>

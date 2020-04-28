@@ -23,14 +23,15 @@ namespace PaymentSystem
         public IActionResult OnPost()
         {
             var con = DbEvents.getConnection();
-            var sql = "INSERT INTO PaymentChannel(Name,ApiKey,SecretKey,BaseUrl,CallbackUrl) Values(@Name,@ApiKey,@SecretKey,@BaseUrl,@CallbackUrl)";
+            var sql = "INSERT INTO PaymentChannel(Name,ApiKey,SecretKey,BaseUrl,CallbackUrl,CallbackUrlCustomer) Values(@Name,@ApiKey,@SecretKey,@BaseUrl,@CallbackUrl,@CallbackUrlCustomer)";
             var param = new
             {
                 Name = PaymentChannel.Name,
                 ApiKey = PaymentChannel.ApiKey,
                 SecretKey = PaymentChannel.SecretKey,
                 BaseUrl = PaymentChannel.BaseUrl,
-                CallbackUrl=PaymentChannel.CallbackUrl
+                CallbackUrl=PaymentChannel.CallbackUrl,
+                CallbackUrlCustomer=PaymentChannel.CallbackUrlCustomer
             };
 
             con.ExecuteAsync(sql, param);

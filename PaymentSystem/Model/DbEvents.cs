@@ -15,7 +15,8 @@ namespace PaymentSystem.Model
 
         public SqlConnection getConnection()
         {
-            return new SqlConnection("Server=.\\SQLEXPRESS;Database=PaymentSystem;Trusted_Connection=Yes;");
+            //return new SqlConnection("Server=.\\SQLEXPRESS;Database=PaymentSystem;Trusted_Connection=Yes;");
+            return new SqlConnection("Server=.;initial catalog=PaymentSystemDb;User Id=PaymentSystemUser;Password=*17gk3dD;");
         }
 
         public bool isLogin(string token)

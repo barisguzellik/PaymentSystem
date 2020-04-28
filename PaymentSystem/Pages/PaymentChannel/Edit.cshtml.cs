@@ -31,7 +31,7 @@ namespace PaymentSystem
         public IActionResult OnPostUpdate()
         {
             var con = DbEvents.getConnection();
-            var sql = "UPDATE Organizations SET Name=@Name,ApiKey=@ApiKey,SecretKey=@SecretKey,BaseUrl=@BaseUrl,CallbackUrl=@CallbackUrl WHERE PaymentChannelId=@PaymentChannelId";
+            var sql = "UPDATE Organizations SET Name=@Name,ApiKey=@ApiKey,SecretKey=@SecretKey,BaseUrl=@BaseUrl,CallbackUrl=@CallbackUrl,CallbackUrlCustomer=@CallbackUrlCustomer WHERE PaymentChannelId=@PaymentChannelId";
             var param = new
             {
                 Name = PaymentChannel.Name,
@@ -39,6 +39,7 @@ namespace PaymentSystem
                 SecretKey = PaymentChannel.SecretKey,
                 BaseUrl = PaymentChannel.BaseUrl,
                 CallbackUrl = PaymentChannel.CallbackUrl,
+                CallbackUrlCustomer = PaymentChannel.CallbackUrlCustomer,
                 PaymentChannelId = PaymentChannel.PaymentChannelId
             };
 

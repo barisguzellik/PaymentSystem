@@ -60,7 +60,7 @@ namespace PaymentSystemForCustomer
             request.Price = DbEvents.convertToLocalPrice(Transaction.Price);
             request.PaidPrice = DbEvents.convertToLocalPrice(Transaction.Price);
             request.Currency = Currency.TRY.ToString();
-            request.CallbackUrl = PaymentChannel.CallbackUrl;
+            request.CallbackUrl = PaymentChannel.CallbackUrlCustomer;
 
             List<int> enabledInstallments = new List<int>();
             enabledInstallments.Add(2);
