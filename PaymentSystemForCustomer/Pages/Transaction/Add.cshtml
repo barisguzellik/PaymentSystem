@@ -1,0 +1,95 @@
+﻿@page
+@model PaymentSystemForCustomer.TransactionAddModel
+@{
+    ViewData["Title"] = "Ödeme Ekle";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Ödeme Ekle</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+                <li class="breadcrumb-item"><a href="/Transaction/List">Ödemelerim</a></li>
+                <li class="breadcrumb-item active">Ödeme Ekle</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <form class="form" method="post">
+                               
+                                <div class="form-group m-t-20 row">
+                                    <label for="example-text-input" class="col-6 col-form-label">
+                                        Tutar
+                                    </label>
+                                    <div class="col-6">
+                                        <input asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="form-group m-t-20 row">
+                                    <label for="example-text-input" class="col-6 col-form-label">
+                                        Ödeme Kanalı
+                                    </label>
+                                    <div class="col-6">
+                                        <select asp-for="PaymentChannelId" class="form-control">
+                                            @foreach (var item in Model.PaymentChannels)
+                                            {
+                                                <option value="@item.PaymentChannelId">@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-info waves-effect m-t-10">KAYDET</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-6" style="border-left:solid 1px #ccc">
+                            <div id="iyzipay-checkout-form" class="responsive"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.selectUser').select2({
+        dropdownCssClass: 'form-control',
+        containerCssClass: 'form-control'
+    });
+
+    $('[data-input-mask="money"]').mask('#.##0,00', { reverse: true });
+
+    /*$('#Transaction_Date').daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        "locale": {
+            "format": "MM/DD/YYYY HH:mm:ss"
+        }
+    });*/
+
+</script>
+<script>
+    function showMessage() {
+            Swal.fire('Kaydet','Değişiklikler kaydedildi...','success');
+    }
+    function errorMessage() {
+            Swal.fire('Hata','Bir hata oluştu...','error');
+    }
+
+         @Model.Message
+</script>
+@Html.Raw(@Model.Iyzico)

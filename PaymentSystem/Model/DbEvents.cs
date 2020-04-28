@@ -33,6 +33,21 @@ namespace PaymentSystem.Model
                 return false;
         }
 
+        public bool isLoginForCustomer(string token)
+        {
+            var sql = "SELECT*FROM Users WHERE Token=@token AND UserType=2 AND Status=1";
+            var param = new
+            {
+                token = token,
+            };
+            var con = getConnection();
+            var d = con.QueryFirstOrDefaultAsync<User>(sql, param);
+            if (d.Result != null)
+                return true;
+            else
+                return false;
+        }
+
         public int getUserId(string token)
         {
             var sql = "SELECT UserId FROM Users WHERE Token=@token";
@@ -50,6 +65,17 @@ namespace PaymentSystem.Model
             var param = new
             {
                 id = id,
+            };
+            var con = getConnection();
+            return con.Query<User>(sql, param).SingleOrDefault();
+        }
+
+        public User getUserByToken(string token)
+        {
+            var sql = "SELECT * FROM Users WHERE Token=@Token";
+            var param = new
+            {
+                Token = token,
             };
             var con = getConnection();
             return con.Query<User>(sql, param).SingleOrDefault();

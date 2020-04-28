@@ -33,7 +33,7 @@ namespace PaymentSystem
                 {
                     Token = data["token"]
                 };
-                Transaction = con.QueryAsync<Transaction>("SELECT*FROM Transaction WHERE Token=@Token", token).Result.Single();
+                Transaction = con.QueryAsync<Transaction>("SELECT*FROM Transactions WHERE Token=@Token", token).Result.Single();
 
                 PaymentChannel = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel WHERE PaymentChannelId=" + Transaction.PaymentChannelId + "").Result.Single();
 

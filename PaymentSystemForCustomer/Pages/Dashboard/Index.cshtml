@@ -1,0 +1,117 @@
+﻿@page
+@model PaymentSystemForCustomer.DashboardIndexModel
+@{
+    ViewData["Title"] = "Gösterge";
+}
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="mdi mdi-credit-card-clock" style="font-size:40px;color:#398bf7;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Toplam Borç</h6>
+                            <h2 class="m-t-0">@Model.totalPayment</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="mdi mdi-credit-card" style="font-size:40px;color:green;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Toplam Ödeme</h6>
+                            <h2 class="m-t-0">@Model.totalTransaction</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="mdi mdi-credit-card" style="font-size:40px;color:darkred;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Başarısız Ödeme</h6>
+                            <h2 class="m-t-0">@Model.totalTransactionFailure</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center">
+                            <span class="lstick m-r-20"></span>
+                            <i class="mdi mdi-credit-card" style="font-size:40px;color:darkred;"></i>
+                        </div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Geciken Ödeme</h6>
+                            <h2 class="m-t-0">@Model.totalDelayedPayment</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table">
+                        <table id="datatable" style="width:100%;" class="display nowrap table table-hover table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>Log</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            data: @Json.Serialize(Model.Log),
+            dom: '',
+            buttons: ['excel', 'pdf'],
+            language: { url: '/assets/plugins/datatables/turkish.json' },
+            order:[[0,"desc"]],
+            columns: [
+                { data: 'date', render: function (data) { return new Date(data).toLocaleString() } },
+                { data: 'description' },
+            ]
+        });
+    });
+</script>
