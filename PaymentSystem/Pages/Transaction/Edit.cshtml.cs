@@ -40,11 +40,12 @@ namespace PaymentSystem
         public IActionResult OnPostUpdate()
         {
             var con = DbEvents.getConnection();
-            var sql = "UPDATE Transactions SET Status=@Status  WHERE TransactionId=@TransactionId";
+            var sql = "UPDATE Transactions SET Status=@Status,TransactionType=@TransactionType  WHERE TransactionId=@TransactionId";
             var param = new
             {
                 Status = Transaction.Status,
-                TransactionId= Transaction.TransactionId
+                TransactionType = Transaction.TransactionType,
+                TransactionId = Transaction.TransactionId
             };
 
             con.ExecuteAsync(sql, param);

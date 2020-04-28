@@ -23,5 +23,11 @@ namespace PaymentSystem.Model
             Pasif = 0,
             Aktif = 1
         }
+        public enum TransactionType
+        {
+            Kredi_Kartı,
+            Havale_EFT,
+            Elden
+        }
     }
 }

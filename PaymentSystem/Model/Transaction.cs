@@ -19,5 +19,6 @@ namespace PaymentSystem.Model
         [DefaultValue(0)]
         public int Status { get; set; }
         public string Token { get; set; }
+        public int TransactionType { get; set; }
     }
 }
