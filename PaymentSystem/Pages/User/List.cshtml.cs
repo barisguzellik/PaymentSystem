@@ -26,7 +26,7 @@ namespace PaymentSystem
             if (!string.IsNullOrEmpty(Request.Query["organizationid"]))
             {
                 int id = int.Parse(Request.Query["organizationid"].ToString());
-                sql += " WHERE Users.OrganizationId=" + id;
+                sql += " AND Users.OrganizationId=" + id;
             }
             User = con.QueryAsync<dynamic>(sql).Result.ToList();
 
