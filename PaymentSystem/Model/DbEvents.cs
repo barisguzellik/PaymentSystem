@@ -8,15 +8,23 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Dapper;
+using Microsoft.Extensions.Options;
+
 namespace PaymentSystem.Model
 {
     public class DbEvents
     {
-
+        public static IConfiguration GetConfig()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            return builder.Build();
+        }
         public SqlConnection getConnection()
         {
-            //return new SqlConnection("Server=.\\SQLEXPRESS;Database=PaymentSystem;Trusted_Connection=Yes;");
-            return new SqlConnection("Server=.;initial catalog=PaymentSystemDb;User Id=PaymentSystemUser;Password=*17gk3dD;");
+            var settings = GetConfig();
+            //return new SqlConnection(settings.GetSection("ConnectionStrings").GetSection("Local").Value);
+            return new SqlConnection(settings.GetSection("ConnectionStrings").GetSection("Remote").Value);
         }
 
         public bool isLogin(string token)

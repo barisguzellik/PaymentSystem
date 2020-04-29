@@ -23,13 +23,13 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <form class="form" method="post">
                                 <div class="form-group m-t-20 row">
-                                    <label for="example-text-input" class="col-6 col-form-label">
+                                    <label for="example-text-input" class="col-2 col-form-label">
                                         Üye
                                     </label>
-                                    <div class="col-6">
+                                    <div class="col-10">
                                         <select asp-for="Transaction.UserId" class="selectUser" style="width:100%;">
                                             @foreach (var item in Model.Users)
                                             {
@@ -39,18 +39,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-t-20 row">
-                                    <label for="example-text-input" class="col-6 col-form-label">
+                                    <label for="example-text-input" class="col-2 col-form-label">
                                         Tutar
                                     </label>
-                                    <div class="col-6">
+                                    <div class="col-10">
                                         <input asp-for="Transaction.Price" data-input-mask="money" class="form-control" required />
                                     </div>
                                 </div>
                                 <div class="form-group m-t-20 row">
-                                    <label for="example-text-input" class="col-6 col-form-label">
+                                    <label for="example-text-input" class="col-2 col-form-label">
                                         Ödeme Kanalı
                                     </label>
-                                    <div class="col-6">
+                                    <div class="col-10">
                                         <select asp-for="PaymentChannelId" class="form-control">
                                             @foreach (var item in Model.PaymentChannels)
                                             {
@@ -60,10 +60,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-t-20 row">
-                                    <label for="example-text-input" class="col-6 col-form-label">
+                                    <label for="example-text-input" class="col-2 col-form-label">
                                         Tip
                                     </label>
-                                    <div class="col-6">
+                                    <div class="col-10">
                                         <select asp-for="Transaction.TransactionType" asp-items="Html.GetEnumSelectList<PaymentSystem.Model.Enums.TransactionType>()" class="form-control"></select>
                                     </div>
                                 </div>
@@ -75,11 +75,12 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-6" style="border-left:solid 1px #ccc">
-                            <div id="iyzipay-checkout-form" class="responsive"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="iyzipay-checkout-form" class="popup"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
