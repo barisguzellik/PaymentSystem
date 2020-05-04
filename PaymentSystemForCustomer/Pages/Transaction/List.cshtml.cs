@@ -23,7 +23,7 @@ namespace PaymentSystemForCustomer
 
             User getUser = DbEvents.getUserByToken(Request.Cookies["token"].ToString());
 
-            var sql = "SELECT*FROM Transactions WHERE UserId="+getUser.UserId+"";
+            var sql = "SELECT Transactions.Date,Transactions.Price,Transactions.TransactionType,Transactions.Status FROM Transactions WHERE UserId=" + getUser.UserId+"";
            
             Transaction = con.QueryAsync<Transaction>(sql).Result.ToList();
 

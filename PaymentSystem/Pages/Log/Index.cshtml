@@ -49,10 +49,10 @@
             language: { url: '/assets/plugins/datatables/turkish.json' },
             order:[[0,"desc"]],
             columns: [
-                { data: 'date', render: function (data) { return new Date(data).toLocaleString() } },
-                { data: 'user.firstName'},
-                { data: 'user.lastName' },
-                { data: 'description' },
+                { data: 'Date', render: function (data) { return new Date(data).toLocaleString() } },
+                { data: 'FirstName'},
+                { data: 'LastName' },
+                { data: 'Description' },
             ]
         });
     });

@@ -18,7 +18,7 @@ namespace PaymentSystem
         public void OnGet()
         {
             var con = DbEvents.getConnection();
-            string sql = "SELECT Organizations.*,(SELECT COUNT(UserId) FROM Users WHERE Users.OrganizationId = Organizations.OrganizationId AND Users.UserType=2) AS UserCount FROM Organizations";
+            string sql = "SELECT Organizations.Name,Organizations.Phone,Organizations.Status,Organizations.OrganizationId,(SELECT COUNT(UserId) FROM Users WHERE Users.OrganizationId = Organizations.OrganizationId AND Users.UserType=2) AS UserCount FROM Organizations";
             Organizations = con.QueryAsync<dynamic>(sql).Result.ToList();
 
             DbEvents.addLog("Şirketler listelendi.", Request.Cookies["token"].ToString());

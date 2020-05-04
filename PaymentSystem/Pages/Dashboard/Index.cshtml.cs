@@ -13,7 +13,7 @@ namespace PaymentSystem
     {
         DbEvents DbEvents = new DbEvents();
 
-        public List<Log> Log { get; set; }
+        public List<dynamic> Log { get; set; }
 
         public string totalOrganization { get; set; }
         public string totalUser { get; set; }
@@ -48,17 +48,16 @@ namespace PaymentSystem
                 _totalTransactionFailure = 0;
             totalTransactionFailure = Convert.ToDouble(_totalTransactionFailure).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
 
-            var _totalDelayedPayment = con.ExecuteScalar("SELECT SUM(Price) FROM Payments WHERE ExpiryDate<'" + DateTime.Now + "'");
+            var _totalDelayedPayment = con.ExecuteScalar("SELECT SUM(Price) FROM Payments WHERE Status=0 AND ExpiryDate<'" + DateTime.Now + "'");
             if (_totalDelayedPayment == null)
                 _totalDelayedPayment = 0;
             totalDelayedPayment = Convert.ToDouble(_totalDelayedPayment).ToString("C", CultureInfo.GetCultureInfo("tr-TR"));
 
             DbEvents.addLog("Gösterge listelendi.", Request.Cookies["token"].ToString());
 
-            var sql = "SELECT TOP 10 * FROM Logs ";
-            sql += " INNER JOIN Users on Users.UserId=Logs.UserId ORDER BY LogId DESC";
-            Log = con.QueryAsync<Log, User, Log>
-            (sql, (l, u) => { l.User = u; return l; }, splitOn: "UserId").Result.ToList();
+            var sql = "SELECT TOP 10 Users.UserId,Logs.UserId,Logs.Date,Users.FirstName,Users.LastName,Logs.Description FROM Logs ";
+            sql += " INNER JOIN Users on Logs.UserId=Users.UserId ORDER BY LogId DESC";
+            Log = con.QueryAsync<dynamic>(sql).Result.ToList();
         }
     }
 }

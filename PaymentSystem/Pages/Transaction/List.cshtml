@@ -61,14 +61,14 @@
             buttons: ['excel', 'pdf'],
             language:{url:'/assets/plugins/datatables/turkish.json'},
             columns: [
-                { data: 'user.organization.name' },
-                { data: 'user.firstName'},
-                { data: 'user.lastName' },
-                { data: 'price', render: function (data) { return parseFloat(data).toLocaleString("tr-TR", { style: 'currency', currency: 'TRY' }) } },
-                { data: 'date', render: function (data) { return new Date(data).toLocaleString() } },
-                { data: 'status', render: function (data) { if (data == 1) { return '<div class=\"badge badge-success\"> </div>' } else { return '<div class=\"badge badge-danger\"> </div>' } } },
+                { data: 'Name' },
+                { data: 'FirstName'},
+                { data: 'LastName' },
+                { data: 'Price', render: function (data) { return parseFloat(data).toLocaleString("tr-TR", { style: 'currency', currency: 'TRY' }) } },
+                { data: 'Date', render: function (data) { return new Date(data).toLocaleString() } },
+                { data: 'Status', render: function (data) { if (data == 1) { return '<div class=\"badge badge-success\"> </div>' } else { return '<div class=\"badge badge-danger\"> </div>' } } },
                 {
-                    data: 'transactionId', orderable: false, class: 'text-center',
+                    data: 'TransactionId', orderable: false, class: 'text-center',
                     render: function (data) {
                         return '<a href="/Transaction/Edit?id=' + data + '" class="btn btn-info waves-effect btn-sm"><i class="mdi mdi-file-edit"></i></a>'
 

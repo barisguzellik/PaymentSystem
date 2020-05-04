@@ -13,15 +13,14 @@ namespace PaymentSystem
     public class LogIndexModel : PageModel
     {
         DbEvents DbEvents = new DbEvents();
-        public List<Log> Log { get; set; }
+        public List<dynamic> Log { get; set; }
 
         public void OnGet()
         {
             var con = DbEvents.getConnection();
-            var sql = "SELECT*FROM Logs";
+            var sql = "SELECT Logs.Date,Users.FirstName,Users.LastName,Logs.Description FROM Logs";
             sql += " INNER JOIN Users on Users.UserId=Logs.UserId";
-            Log = con.QueryAsync<Log, User, Log>
-            (sql, (l, u) => { l.User = u; return l; }, splitOn: "UserId").Result.ToList();
+            Log = con.QueryAsync<dynamic>(sql).Result.ToList();
         }
     }
 }

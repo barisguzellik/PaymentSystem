@@ -22,7 +22,7 @@ namespace PaymentSystemForCustomer
             User User = DbEvents.getUserByToken(Request.Cookies["token"].ToString());
 
             var con = DbEvents.getConnection();
-            var sql = "SELECT*FROM Payments WHERE UserId=" + User.UserId + "";
+            var sql = "SELECT Payments.CreatedDate,Payments.Price,Payments.ExpiryDate,Payments.Description,Payments.Status FROM Payments WHERE UserId=" + User.UserId + "";
 
             Payment = con.QueryAsync<Payment>(sql).Result.ToList();
 

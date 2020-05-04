@@ -53,9 +53,11 @@ namespace PaymentSystem
             var checkoutFormToken = "";
             int paymentStatus = 0;
 
+            PaymentChannel = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel WHERE PaymentChannelId=" + PaymentChannelId + "").Result.Single();
+
             if (Transaction.TransactionType == (int)Enums.TransactionType.Kredi_Kartı)
             {
-                PaymentChannel = con.QueryAsync<PaymentChannel>("SELECT*FROM PaymentChannel WHERE PaymentChannelId=" + PaymentChannelId + "").Result.Single();
+                
                 Options options = new Options()
                 {
                     ApiKey = PaymentChannel.ApiKey,
